@@ -36,7 +36,6 @@ implements AbsListView.OnScrollListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people_find);
-        setContentView(R.layout.activity_main);
         List<String> itemList=new ArrayList<String>();
         for(int i=0;i<mCount;i++){
             itemList.add("No."+i);

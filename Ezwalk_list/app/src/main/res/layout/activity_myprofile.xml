@@ -78,7 +78,13 @@
             android:text="修改"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button" />
+            android:id="@+id/revise" />
+
+        <Button
+            android:text="登出帳號"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Logout" />
 
     </LinearLayout>
 
