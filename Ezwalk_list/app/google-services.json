@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1081862520205",
+    "firebase_url": "https://ezwalk-91e0d.firebaseio.com",
+    "project_id": "ezwalk-91e0d",
+    "storage_bucket": "ezwalk-91e0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081862520205:android:5fc0989eb6e72d0f",
+        "android_client_info": {
+          "package_name": "com.example.user.ezwalk_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081862520205-grtk0i38tcgq06jvvn0o5iklb9u1ue10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.ezwalk_list",
+            "certificate_hash": "0D1D1ACC684B37A9D4F1890B3D0B39FAC67775C8"
+          }
+        },
+        {
+          "client_id": "1081862520205-lgf3vhu2juu60rjkdnciol9o25i4vmsd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcUenFT5GPtxPQjKJOIxXfIQnH9uOj7Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081862520205-lgf3vhu2juu60rjkdnciol9o25i4vmsd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"Ezwalk "</string>
+    <string name="chatroom">My Chat Room</string>
+    <string name="peoplefind">Go To Walking</string>
+    <string name="profile">My Profile</string>
+</resources>
