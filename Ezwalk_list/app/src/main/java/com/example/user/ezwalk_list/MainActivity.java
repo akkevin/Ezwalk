@@ -17,6 +17,10 @@ import android.widget.TextView;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
@@ -51,15 +56,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Firebase.setAndroidContext(this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 if (firebaseAuth.getCurrentUser() != null) {
+                    FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
+                    String name="";
+                    if(muser!=null){
+                        name = muser.getDisplayName();
+                    }
+                    Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/");
+                    final Firebase userRef = myFirebaseRef.child("users").child(name);
+                    userRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            if(snapshot.getChildrenCount()==0){
+                                User user=new User(18,"male","睡覺","安安",50,50);
+                                userRef.setValue(user);
+                            }
+                        }
 
-                    startActivity(new Intent(MainActivity.this, MainSurround.class));
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
 
+                        }
+                    });
+                    startActivity(new Intent(MainActivity.this,MainSurround.class));
                 }
             }
         };
@@ -114,9 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign In failed, update UI appropriately
-                // ...
             }
         }
     }

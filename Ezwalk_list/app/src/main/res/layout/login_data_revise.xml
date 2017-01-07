@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_data_revise"
+    android:id="@+id/login_data_revise"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.user.ezwalk_list.Data_revise">
+    tools:context="com.example.user.ezwalk_list.Login_data_revise">
 
     <TextView
         android:text="興趣:"
@@ -28,38 +28,26 @@
         android:id="@+id/r_pertime"
         android:layout_below="@+id/r_saying"
         android:layout_alignStart="@+id/r_saying"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:layout_below="@+id/editpertime"
-        android:layout_alignStart="@+id/editpertime"
-        android:layout_marginTop="47dp"
-        android:id="@+id/editperdistance" />
+        android:layout_alignBottom="@+id/r_pertime"
+        android:layout_alignEnd="@+id/leditsaying"
+        android:id="@+id/leditpertime" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="number"
         android:ems="10"
-        android:id="@+id/editinterest"
-        android:layout_alignBaseline="@+id/r_interest"
-        android:layout_alignBottom="@+id/r_interest"
-        android:layout_alignStart="@+id/edityearold" />
-
-    <TextView
-        android:text="想說的話:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/r_saying"
-        android:layout_marginTop="40dp"
-        android:textSize="20sp"
-        android:layout_below="@+id/editinterest"
-        android:layout_alignStart="@+id/r_interest" />
+        android:layout_below="@+id/leditpertime"
+        android:layout_alignStart="@+id/leditpertime"
+        android:layout_marginTop="47dp"
+        android:id="@+id/leditperdistance" />
 
     <TextView
         android:text="每公尺:"
@@ -67,7 +55,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/r_perdistance"
         android:textSize="20sp"
-        android:layout_alignTop="@+id/editperdistance"
+        android:layout_alignTop="@+id/leditperdistance"
         android:layout_alignStart="@+id/r_pertime" />
 
     <Button
@@ -78,69 +66,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/r_perdistance" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editpertime"
-        android:layout_alignBottom="@+id/r_pertime"
-        android:layout_toEndOf="@+id/done" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:layout_marginTop="12dp"
-        android:id="@+id/edityearold"
-        android:layout_below="@+id/r_gender"
-        android:layout_alignStart="@+id/editpertime" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/editsaying"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/editinterest"
-        android:layout_marginStart="14dp" />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/edityearold"
-        android:layout_alignStart="@+id/edityearold"
-        android:orientation="horizontal"
-        android:layout_alignEnd="@+id/edityearold"
-        android:id="@+id/gender">
-
-        <RadioButton
-            android:text="male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/male"
-            android:layout_weight="1"
-            android:paddingLeft="5sp"
-            android:checked="true"/>
-
-        <RadioButton
-            android:text="female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/female"
-            android:layout_weight="1"
-            android:paddingLeft="5sp"/>
-
-    </RadioGroup>
-
     <TextView
         android:text="性別:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="25dp"
         android:id="@+id/r_gender"
         android:textSize="20sp"
         android:layout_alignParentTop="true"
@@ -152,6 +83,71 @@
         android:layout_height="wrap_content"
         android:id="@+id/r_yearold"
         android:textSize="20sp"
-        android:layout_alignBottom="@+id/edityearold"
+        android:layout_alignBottom="@+id/ledityearold"
         android:layout_alignStart="@+id/r_gender" />
+
+    <TextView
+        android:text="想說的話:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r_saying"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/leditsaying"
+        android:layout_alignBottom="@+id/r_saying"
+        android:layout_alignStart="@+id/leditinterest" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/leditinterest"
+        android:layout_alignBottom="@+id/r_interest"
+        android:layout_toEndOf="@+id/done"
+        android:layout_marginStart="12dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/ledityearold"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/r_gender"
+        android:layout_alignStart="@+id/leditinterest" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignTop="@+id/r_gender"
+        android:id="@+id/lgenger"
+        android:layout_alignEnd="@+id/ledityearold"
+        android:layout_toEndOf="@+id/done">
+
+        <RadioButton
+            android:text="male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lmale"
+            android:layout_weight="1"
+            android:checked="true"
+            android:paddingLeft="5sp"/>
+
+        <RadioButton
+            android:text="female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lfemale"
+            android:layout_weight="1"
+            android:paddingLeft="5sp"/>
+    </RadioGroup>
 </RelativeLayout>

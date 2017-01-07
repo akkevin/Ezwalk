@@ -4,4 +4,5 @@
     <string name="profile">個人檔案</string>
     <string name="chatroom">愛聊聊天室</string>
     <string name="datarevise">修改個人檔案</string>
+    <string name="logindatarevise">創立個人檔案</string>
 </resources>

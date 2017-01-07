@@ -19,7 +19,7 @@ import java.util.List;
 public class ListAdapter extends BaseAdapter{
     public List<String> arraylist;
     private Context context;
-    int count=20;
+    int count=10;
     public ListAdapter(Context context) {
         this.context = context;
     }
