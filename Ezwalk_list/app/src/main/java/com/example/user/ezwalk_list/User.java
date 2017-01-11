@@ -3,18 +3,17 @@ package com.example.user.ezwalk_list;
 
 
 public class User {
-    private int age;
+    private int age=0;
     private String gender;
     private String interest;
-    private String name;
     private String saying;
     private int pertime;
     private int perdistance;
-
+    private String name;
     public User() {
     }
 
-    public User(int age,String gender,String interest,String name,String saying,int pertime,int perdistance) {
+    public User(int age,String gender,String interest,String saying,int pertime,int perdistance,String name) {
         this.age = age;
         this.gender=gender;
         this.interest=interest;

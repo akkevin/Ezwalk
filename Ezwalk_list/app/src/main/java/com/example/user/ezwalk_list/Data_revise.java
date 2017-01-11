@@ -11,9 +11,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +34,7 @@ public class Data_revise extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_revise);
         Firebase.setAndroidContext(this);
-        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
+        final Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
         Yearold=(EditText)findViewById(R.id.edityearold);
         Interest=(EditText)findViewById(R.id.editinterest);
         Saying=(EditText)findViewById(R.id.editsaying);
@@ -46,22 +48,35 @@ public class Data_revise extends AppCompatActivity {
         if(muser!=null){
             name = muser.getDisplayName();
         }
-        final Firebase userRef = myFirebaseRef.child(name);
-        userRef.addValueEventListener(new ValueEventListener() {
+        Query queryRef=myFirebaseRef.orderByChild("name").equalTo(name);
+        queryRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    User user=dataSnapshot.getValue(User.class);
-                    Yearold.setText(String.valueOf(user.getAge()));
-                    Interest.setText(user.getInterest());
-                    Saying.setText(user.getSaying());
-                    Pertime.setText(String.valueOf(user.getPertime()));
-                    Perdistance.setText(String.valueOf(user.getPerdistance()));
-                    if(user.getGender()=="male")
-                        Male.setChecked(true);
-                    if(user.getGender()=="female")
-                        Female.setChecked(true);
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                User user=dataSnapshot.getValue(User.class);
+                Yearold.setText(String.valueOf(user.getAge()));
+                Interest.setText(user.getInterest());
+                Saying.setText(user.getSaying());
+                Pertime.setText(String.valueOf(user.getPertime()));
+                Perdistance.setText(String.valueOf(user.getPerdistance()));
+                if(user.getGender()=="male")
+                    Male.setChecked(true);
+                if(user.getGender()=="female")
+                    Female.setChecked(true);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -83,13 +98,13 @@ public class Data_revise extends AppCompatActivity {
                 perdistance=Integer.parseInt(Perdistance.getText().toString());
                 interest=Interest.getText().toString();
                 saying=Saying.getText().toString();
-                final User user=new User(yearold,Gender,interest,name,saying,pertime,perdistance);
+                final User user=new User(yearold,Gender,interest,saying,pertime,perdistance,name);
                 if(Male.isChecked())
                     user.setGender("male");
                 if(Female.isChecked())
                     user.setGender("female");
                 Gender=user.getGender();
-                userRef.setValue(user, new Firebase.CompletionListener() {
+                myFirebaseRef.child(name).setValue(user, new Firebase.CompletionListener() {
                     @Override
                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                         if (firebaseError != null) {

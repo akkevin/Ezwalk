@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
                             if(snapshot.getChildrenCount()==0){
-                                User user=new User(18,"male","睡覺",name,"安安",50,50);
+                                User user=new User(18,"male","睡覺","安安",50,50,name);
                                 userRef.setValue(user);
                             }
                         }

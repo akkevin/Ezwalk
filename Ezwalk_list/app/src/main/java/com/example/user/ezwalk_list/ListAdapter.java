@@ -19,13 +19,18 @@ import java.util.List;
 public class ListAdapter extends BaseAdapter{
     public List<String> arraylist;
     private Context context;
-
+    private List<String> userlist;
     int count=10;
     public ListAdapter(Context context) {
         this.context = context;
     }
 
-    public ListAdapter(Context context, List<String> lists) {
+    public ListAdapter(Context context, List<String> lists,List<String> userlist) {
+        this.context = context;
+        arraylist = lists;
+        this.userlist=userlist;
+    }
+    public ListAdapter(Context context, List<String> lists){
         this.context = context;
         arraylist = lists;
     }
@@ -54,7 +59,8 @@ public class ListAdapter extends BaseAdapter{
         }
 
          viewHolder.itemTv.setText(arraylist.get(position));
-        viewHolder.menuTv.setText("這是第 " + (position+1) + "個～");
+        viewHolder.menuTv.setText(userlist.get(position));
+
         viewHolder.menuLy.measure(0, 0);
         final int height = viewHolder.menuLy.getMeasuredHeight();
         viewHolder.itemTv.setOnClickListener(new View.OnClickListener() {

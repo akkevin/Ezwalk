@@ -36,7 +36,8 @@ implements AbsListView.OnScrollListener{
     private int mLastItem=0;
     int mCount=1000;
     int CCount=1;
-    final List<String> itemList=new ArrayList<String>();
+    final List<String> itemList=new ArrayList<>();
+    final List<String> userList=new ArrayList<>();
     private LinearLayout mLoadLayout;
     private final Handler mHandler=new Handler();
     private final LinearLayout.LayoutParams mProgressBarLayoutParams=new LinearLayout.LayoutParams(
@@ -57,13 +58,20 @@ implements AbsListView.OnScrollListener{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 CCount=(int)dataSnapshot.getChildrenCount();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-
+                    User user=snapshot.getValue(User.class);
                     itemList.add(snapshot.child("name").getValue().toString());
+                    userList.add("年齡:"+snapshot.child("age").getValue().toString()+
+                                "\n性別:"+snapshot.child("gender").getValue().toString()+
+                                "\n興趣:"+snapshot.child("interest").getValue().toString()+
+                                "\n想說的話:"+snapshot.child("saying").getValue().toString()+
+                                "\n每分鐘:"+snapshot.child("pertime").getValue().toString()+
+                                "\n每公尺:"+snapshot.child("perdistance").getValue().toString());
                 }
                 for(int i=CCount;i<30;i++){
                     itemList.add("NO DATA");
+                    userList.add("NO DATA");
                 }
-                mAdapter=new ListAdapter(people_find.this,itemList);
+                mAdapter=new ListAdapter(people_find.this,itemList,userList);
                 mLoadLayout=new LinearLayout(people_find.this);
                 mLoadLayout.setMinimumHeight(60);
                 mLoadLayout.setGravity(Gravity.CENTER);
