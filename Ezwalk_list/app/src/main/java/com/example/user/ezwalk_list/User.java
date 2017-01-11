@@ -6,22 +6,23 @@ public class User {
     private int age;
     private String gender;
     private String interest;
-    private String Saying;
-    private int Pertime;
-    private int Perdistance;
+    private String name;
+    private String saying;
+    private int pertime;
+    private int perdistance;
 
     public User() {
     }
 
-    public User(int age,String gender,String interest,String saying,int pertime,int perdistance) {
+    public User(int age,String gender,String interest,String name,String saying,int pertime,int perdistance) {
         this.age = age;
         this.gender=gender;
         this.interest=interest;
-        this.Saying=saying;
-        this.Pertime=pertime;
-        this.Perdistance=perdistance;
+        this.saying=saying;
+        this.pertime=pertime;
+        this.perdistance=perdistance;
+        this.name=name;
     }
-
     public int getAge() {
         return age;
     }
@@ -38,15 +39,19 @@ public class User {
 
     public void setInterest(String interest){this.interest=interest;}
 
-    public String getSaying(){return Saying;}
+    public String getSaying(){return saying;}
 
-    public void setSaying(String saying){this.Saying=saying;}
+    public void setSaying(String saying){this.saying=saying;}
 
-    public int getPertime(){return Pertime;}
+    public int getPertime(){return pertime;}
 
-    public void setPertime(int pertime){this.Pertime=pertime;}
+    public void setPertime(int pertime){this.pertime=pertime;}
 
-    public int getPerdistance(){return Perdistance;}
+    public int getPerdistance(){return perdistance;}
 
-    public void setPerdistance(int perdistance){this.Perdistance=perdistance;}
+    public void setPerdistance(int perdistance){this.perdistance=perdistance;}
+
+    public String getName(){return name;}
+
+    public void setName(String name){this.name=name;}
 }

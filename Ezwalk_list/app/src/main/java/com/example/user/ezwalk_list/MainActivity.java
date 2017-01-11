@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-
+    String name="";
     private static final String TAG = "MAIN_ACTIVITY";
 
     @Override
@@ -64,21 +64,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if (firebaseAuth.getCurrentUser() != null) {
                     FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
-                    String name="";
                     if(muser!=null){
                         name = muser.getDisplayName();
                     }
-                    Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/");
-                    final Firebase userRef = myFirebaseRef.child("users").child(name);
+                    Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
+                    final Firebase userRef = myFirebaseRef.child(name);
                     userRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
                             if(snapshot.getChildrenCount()==0){
-                                User user=new User(18,"male","睡覺","安安",50,50);
+                                User user=new User(18,"male","睡覺",name,"安安",50,50);
                                 userRef.setValue(user);
                             }
                         }
-
                         @Override
                         public void onCancelled(FirebaseError firebaseError) {
 

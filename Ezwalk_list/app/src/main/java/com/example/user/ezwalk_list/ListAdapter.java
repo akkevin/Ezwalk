@@ -19,6 +19,7 @@ import java.util.List;
 public class ListAdapter extends BaseAdapter{
     public List<String> arraylist;
     private Context context;
+
     int count=10;
     public ListAdapter(Context context) {
         this.context = context;
@@ -52,7 +53,7 @@ public class ListAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.itemTv.setText(arraylist.get(position));
+         viewHolder.itemTv.setText(arraylist.get(position));
         viewHolder.menuTv.setText("這是第 " + (position+1) + "個～");
         viewHolder.menuLy.measure(0, 0);
         final int height = viewHolder.menuLy.getMeasuredHeight();

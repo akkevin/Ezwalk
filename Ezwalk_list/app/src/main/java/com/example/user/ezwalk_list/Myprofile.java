@@ -31,7 +31,6 @@ public class Myprofile extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String Mname;
-    private String email;
     private String urll;
     private ImageView img;
     private String gender;
@@ -54,7 +53,6 @@ public class Myprofile extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user!=null){
             Mname = user.getDisplayName();
-            email = user.getEmail();
             urll = user.getPhotoUrl().toString();
             img=(ImageView)findViewById(R.id.pic);
 
@@ -110,8 +108,8 @@ public class Myprofile extends AppCompatActivity {
         }
     };
     void loaddata(){
-        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/");
-        Firebase userRef = myFirebaseRef.child("users");
+        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
+        Firebase userRef = myFirebaseRef.child(Mname);
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -160,8 +158,8 @@ public class Myprofile extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/");
-        Firebase userRef = myFirebaseRef.child("users");
+        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
+        Firebase userRef = myFirebaseRef.child(Mname);
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -171,7 +169,7 @@ public class Myprofile extends AppCompatActivity {
                     gender=user.getGender();
                     age=user.getAge();
                     TextView name=(TextView)findViewById(R.id.name);
-                    name.setText(Mname+"\n"+gender+"\t"+age);
+                    name.setText(Mname+"\n"+gender+"  /  "+age+"歲");
                     TextView interest=(TextView)findViewById(R.id.interest);
                     interest.setText("興趣是："+user.getInterest());
                     TextView saying=(TextView)findViewById(R.id.saying);
@@ -189,5 +187,6 @@ public class Myprofile extends AppCompatActivity {
             }
         });
     }
+
 }
 

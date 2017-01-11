@@ -32,7 +32,7 @@ public class Data_revise extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_revise);
         Firebase.setAndroidContext(this);
-        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/");
+        Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
         Yearold=(EditText)findViewById(R.id.edityearold);
         Interest=(EditText)findViewById(R.id.editinterest);
         Saying=(EditText)findViewById(R.id.editsaying);
@@ -46,9 +46,8 @@ public class Data_revise extends AppCompatActivity {
         if(muser!=null){
             name = muser.getDisplayName();
         }
-        final Firebase userRef = myFirebaseRef.child("users").child(name);
-        Firebase iniRef=myFirebaseRef.child("users");
-        iniRef.addValueEventListener(new ValueEventListener() {
+        final Firebase userRef = myFirebaseRef.child(name);
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
@@ -84,7 +83,7 @@ public class Data_revise extends AppCompatActivity {
                 perdistance=Integer.parseInt(Perdistance.getText().toString());
                 interest=Interest.getText().toString();
                 saying=Saying.getText().toString();
-                final User user=new User(yearold,Gender,interest,saying,pertime,perdistance);
+                final User user=new User(yearold,Gender,interest,name,saying,pertime,perdistance);
                 if(Male.isChecked())
                     user.setGender("male");
                 if(Female.isChecked())

@@ -3,6 +3,7 @@ package com.example.user.ezwalk_list;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,15 +24,19 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class people_find extends ListActivity
 implements AbsListView.OnScrollListener{
     private ListView lsv_main;
     private ListAdapter mAdapter;
-
     private int mLastItem=0;
-    int mCount=1;
+    int mCount=1000;
+    int CCount=1;
+    final List<String> itemList=new ArrayList<String>();
     private LinearLayout mLoadLayout;
     private final Handler mHandler=new Handler();
     private final LinearLayout.LayoutParams mProgressBarLayoutParams=new LinearLayout.LayoutParams(
@@ -46,12 +51,38 @@ implements AbsListView.OnScrollListener{
         setContentView(R.layout.activity_people_find);
         Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://ezwalk-91e0d.firebaseio.com/users");
+
         myFirebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                long c=dataSnapshot.getChildrenCount();
-                mCount=(int)c;
-                Log.d("ggg","eee"+mCount);
+                CCount=(int)dataSnapshot.getChildrenCount();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+
+                    itemList.add(snapshot.child("name").getValue().toString());
+                }
+                for(int i=CCount;i<30;i++){
+                    itemList.add("NO DATA");
+                }
+                mAdapter=new ListAdapter(people_find.this,itemList);
+                mLoadLayout=new LinearLayout(people_find.this);
+                mLoadLayout.setMinimumHeight(60);
+                mLoadLayout.setGravity(Gravity.CENTER);
+                mLoadLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+                ProgressBar mProgressBar = new ProgressBar(people_find.this);
+                mProgressBar.setPadding(0, 0, 15, 0);
+                mLoadLayout.addView(mProgressBar, mProgressBarLayoutParams);
+
+                TextView mTipContent = new TextView(people_find.this);
+                mTipContent.setText("加載中......");
+                mLoadLayout.addView(mTipContent, mTipContentLayoutParams);
+                lsv_main=getListView();
+                lsv_main.addFooterView(mLoadLayout);
+
+                setListAdapter(mAdapter);
+                lsv_main.setOnScrollListener(people_find.this);
+                lsv_main.setOnItemClickListener(listViewOnItemClickListener);
+                lsv_main.setOnItemLongClickListener(listViewOnItemLongClickListener);
             }
 
             @Override
@@ -59,30 +90,9 @@ implements AbsListView.OnScrollListener{
 
             }
         });
-        List<String> itemList=new ArrayList<String>();
-        for(int i=0;i<mCount;i++){
-            itemList.add("No."+i);
-        }
-        mAdapter=new ListAdapter(people_find.this,itemList);
-        mLoadLayout=new LinearLayout(this);
-        mLoadLayout.setMinimumHeight(60);
-        mLoadLayout.setGravity(Gravity.CENTER);
-        mLoadLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-        ProgressBar mProgressBar = new ProgressBar(this);
-        mProgressBar.setPadding(0, 0, 15, 0);
-        mLoadLayout.addView(mProgressBar, mProgressBarLayoutParams);
 
-        TextView mTipContent = new TextView(this);
-        mTipContent.setText("加載中......");
-        mLoadLayout.addView(mTipContent, mTipContentLayoutParams);
-        lsv_main=getListView();
-        lsv_main.addFooterView(mLoadLayout);
 
-        setListAdapter(mAdapter);
-        lsv_main.setOnScrollListener(this);
-        lsv_main.setOnItemClickListener(listViewOnItemClickListener);
-        lsv_main.setOnItemLongClickListener(listViewOnItemLongClickListener);
     }
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -101,7 +111,7 @@ implements AbsListView.OnScrollListener{
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mAdapter.count+=30;
+                        mAdapter.count+=10;
                         mAdapter.notifyDataSetChanged();
                         lsv_main.setSelection(mLastItem);
                     }
